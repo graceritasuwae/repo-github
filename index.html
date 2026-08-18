@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIPERLING - Sistem Aduan Penerangan Lingkungan</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <a class="brand" href="#beranda" aria-label="SIPERLING Beranda">
+        <span class="brand-icon">💡</span>
+        <span>
+          <strong>SIPERLING</strong>
+          <small>Aduan Penerangan Lingkungan</small>
+        </span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#beranda">Beranda</a>
+        <a href="#buat-aduan">Buat Aduan</a>
+        <a href="#cek-status">Cek Status</a>
+        <a href="#data-aduan">Data Aduan</a>
+        <a href="#panduan">Panduan</a>
+        <a href="#admin">Admin</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="beranda" class="hero section">
+      <div class="hero-content">
+        <p class="eyebrow">Layanan Aduan Masyarakat</p>
+        <h1>Laporkan kerusakan fasilitas umum, penerangan jalan, lingkungan, dan permukiman.</h1>
+        <p class="hero-text">
+          Website ini membantu masyarakat menyampaikan laporan secara cepat, lengkap, dan terdokumentasi agar petugas dapat melakukan pengecekan serta tindak lanjut.
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#buat-aduan">Buat Aduan Sekarang</a>
+          <a class="btn secondary" href="#cek-status">Cek Status Aduan</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h2>Ringkasan Aduan</h2>
+        <div class="stats-grid">
+          <div><strong id="totalAduan">0</strong><span>Total Aduan</span></div>
+          <div><strong id="aduanProses">0</strong><span>Diproses</span></div>
+          <div><strong id="aduanSelesai">0</strong><span>Selesai</span></div>
+          <div><strong id="aduanPrioritas">0</strong><span>Prioritas</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section categories">
+      <div class="section-heading">
+        <p class="eyebrow">Kategori Laporan</p>
+        <h2>Jenis aduan yang dapat dilaporkan</h2>
+      </div>
+      <div class="category-grid">
+        <article class="category-card"><span>💡</span><h3>Lampu Jalan Mati</h3><p>PJU tidak menyala, redup, berkedip, atau menyala pada siang hari.</p></article>
+        <article class="category-card"><span>🛣️</span><h3>Jalan Lingkungan</h3><p>Jalan rusak, berlubang, licin, atau membahayakan pengguna jalan.</p></article>
+        <article class="category-card"><span>🏘️</span><h3>Permukiman</h3><p>Gang gelap, fasilitas umum rusak, pos ronda, taman, atau area warga.</p></article>
+        <article class="category-card"><span>⚠️</span><h3>Keselamatan</h3><p>Kabel menjuntai, tiang miring, korsleting, atau risiko kecelakaan.</p></article>
+      </div>
+    </section>
+
+    <section id="buat-aduan" class="section form-section">
+      <div class="section-heading">
+        <p class="eyebrow">Form Aduan</p>
+        <h2>Buat laporan baru</h2>
+        <p>Isi data secara jelas. Sistem akan membuat nomor tiket otomatis untuk pengecekan status.</p>
+      </div>
+
+      <form id="aduanForm" class="aduan-form">
+        <div class="form-grid">
+          <label>Nama Pelapor
+            <input type="text" id="nama" placeholder="Contoh: Budi Santoso" required />
+          </label>
+          <label>No. HP/WhatsApp
+            <input type="tel" id="kontak" placeholder="Contoh: 081234567890" required />
+          </label>
+          <label>Kategori Aduan
+            <select id="kategori" required>
+              <option value="">Pilih kategori</option>
+              <option>Lampu jalan mati</option>
+              <option>Lampu redup/berkedip</option>
+              <option>Belum ada penerangan</option>
+              <option>Tiang/kabel PJU rusak</option>
+              <option>Jalan lingkungan rusak</option>
+              <option>Fasilitas umum permukiman rusak</option>
+              <option>Lainnya</option>
+            </select>
+          </label>
+          <label>Tingkat Urgensi
+            <select id="urgensi" required>
+              <option value="Normal">Normal</option>
+              <option value="Penting">Penting</option>
+              <option value="Darurat">Darurat</option>
+            </select>
+          </label>
+          <label>Alamat Lokasi Aduan
+            <input type="text" id="alamat" placeholder="Contoh: Jl. Melati RT 03/RW 02" required />
+          </label>
+          <label>Kelurahan/Desa
+            <input type="text" id="wilayah" placeholder="Contoh: Kelurahan Sukamaju" required />
+          </label>
+          <label>Koordinat Lokasi <small>opsional</small>
+            <input type="text" id="koordinat" placeholder="Contoh: -6.200000, 106.816666" />
+          </label>
+          <label>Foto Bukti <small>opsional, JPG/PNG</small>
+            <input type="file" id="foto" accept="image/*" />
+          </label>
+        </div>
+        <label>Deskripsi Aduan
+          <textarea id="deskripsi" rows="5" placeholder="Jelaskan masalah, titik lokasi, kondisi kerusakan, dan dampaknya bagi warga." required></textarea>
+        </label>
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Kirim Aduan</button>
+          <button type="reset" class="btn ghost">Reset</button>
+        </div>
+      </form>
+
+      <div id="successBox" class="success-box hidden"></div>
+    </section>
+
+    <section id="cek-status" class="section status-section">
+      <div class="section-heading">
+        <p class="eyebrow">Tracking</p>
+        <h2>Cek status aduan</h2>
+        <p>Masukkan nomor tiket, misalnya: ADU-20260709-001.</p>
+      </div>
+      <div class="status-card">
+        <input type="text" id="kodeCek" placeholder="Masukkan nomor tiket aduan" />
+        <button class="btn primary" id="btnCek">Cek Status</button>
+      </div>
+      <div id="hasilCek" class="hasil-cek"></div>
+    </section>
+
+    <section id="data-aduan" class="section table-section">
+      <div class="section-heading with-action">
+        <div>
+          <p class="eyebrow">Transparansi</p>
+          <h2>Data aduan masyarakat</h2>
+          <p>Daftar laporan yang tersimpan pada perangkat/browser ini.</p>
+        </div>
+        <div class="table-actions">
+          <input type="search" id="searchAduan" placeholder="Cari aduan..." />
+          <button class="btn secondary" id="btnExport">Export CSV</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>No Tiket</th>
+              <th>Tanggal</th>
+              <th>Kategori</th>
+              <th>Lokasi</th>
+              <th>Urgensi</th>
+              <th>Status</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="aduanTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="panduan" class="section guide-section">
+      <div class="section-heading">
+        <p class="eyebrow">Panduan</p>
+        <h2>Alur penanganan aduan</h2>
+      </div>
+      <div class="timeline">
+        <div><strong>1. Laporan Masuk</strong><p>Warga mengirim aduan melalui formulir.</p></div>
+        <div><strong>2. Verifikasi</strong><p>Petugas memeriksa kelengkapan lokasi, kategori, dan bukti.</p></div>
+        <div><strong>3. Penanganan</strong><p>Tim teknis melakukan pengecekan lapangan dan perbaikan.</p></div>
+        <div><strong>4. Selesai</strong><p>Status diperbarui setelah perbaikan atau tindak lanjut dilakukan.</p></div>
+      </div>
+      <div class="notice">
+        <strong>Catatan:</strong> Untuk kondisi darurat seperti kabel terbuka, tiang roboh, atau potensi korsleting, warga sebaiknya juga menghubungi petugas/instansi terkait secara langsung.
+      </div>
+    </section>
+
+    <section id="admin" class="section admin-section">
+      <div class="section-heading">
+        <p class="eyebrow">Dashboard Petugas</p>
+        <h2>Kelola aduan</h2>
+        <p>Demo login: username <strong>admin</strong>, password <strong>admin123</strong>.</p>
+      </div>
+
+      <div id="loginPanel" class="admin-card">
+        <label>Username
+          <input type="text" id="adminUser" placeholder="admin" />
+        </label>
+        <label>Password
+          <input type="password" id="adminPass" placeholder="admin123" />
+        </label>
+        <button class="btn primary" id="btnLogin">Masuk Admin</button>
+        <p id="loginMsg" class="error-text"></p>
+      </div>
+
+      <div id="adminPanel" class="admin-panel hidden">
+        <div class="admin-toolbar">
+          <button class="btn secondary" id="btnTambahDummy">Tambah Data Contoh</button>
+          <button class="btn danger" id="btnHapusSemua">Hapus Semua Aduan</button>
+          <button class="btn ghost" id="btnLogout">Keluar</button>
+        </div>
+        <div id="adminList" class="admin-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose" aria-label="Tutup">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>© 2026 SIPERLING. Prototipe layanan aduan fasilitas umum, penerangan jalan lingkungan, dan permukiman.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
